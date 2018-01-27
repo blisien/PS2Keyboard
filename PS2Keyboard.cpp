@@ -533,7 +533,10 @@ void PS2Keyboard::begin(uint8_t data_pin, uint8_t irq_pin, const PS2Keymap_t &ma
   digitalWrite(data_pin, HIGH);
 #endif
 
-#ifdef CORE_INT_EVERY_PIN
+#ifdef digitalPinToInterrupt
+  irq_num = digitalPinToInterrupt(irq_pin);
+
+#elif defined(CORE_INT_EVERY_PIN)
   irq_num = irq_pin;
 
 #else
